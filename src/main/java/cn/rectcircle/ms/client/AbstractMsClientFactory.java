@@ -112,7 +112,7 @@ public abstract class AbstractMsClientFactory<SC, C extends MsClientConfig<SC>> 
     /** 服务发现的同时记录服务节点数 */
     private BlockingQueue<ServiceNode> getServiceNodeBlockingQueue(InternalCacheKey<SC, ?> key) {
         BlockingQueue<ServiceNode> serviceNodes = this.serviceNodes.computeIfAbsent(key,
-                psm -> new LinkedBlockingQueue<>());
+                sc -> new LinkedBlockingQueue<>());
         if (serviceNodes.size() == 0) {
             List<ServiceNode> tmp = this.factoryConfig.getDiscovery().discovery(key.getServiceCoordinate());
             if (tmp == null || tmp.size() == 0) {
